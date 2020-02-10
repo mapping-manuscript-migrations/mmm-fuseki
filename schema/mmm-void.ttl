@@ -9,6 +9,8 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix wgs84: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
 
 <http://ldf.fi/mmm> a ssd:Dataset , void:Dataset , dcat:Dataset ;
     ldf-schema:dataVisualization <http://www.ldf.fi/visualization/mmm> ;
@@ -37,24 +39,40 @@
     void:uriLookupEndPoint <http://ldf.fi/data?uri=> ;
     void:uriSpace "http://ldf.fi/mmm/" ;
     # void:dataDump <https://zenodo.org/record/3431122/files/warsampo.zip> ;
-    ssd:namedGraph [
-		a ssd:NamedGraph ;
-		ssd:name <http://ldf.fi/mmm/> ;
-		ssd:graph <http://ldf.fi/mmm/> ;
-	] ;
+    ssd:namedGraph [ a ssd:NamedGraph ;
+            ssd:name <http://ldf.fi/mmm/> ;
+            ssd:graph <http://ldf.fi/mmm/> ],
+        [ a ssd:NamedGraph ;
+		    ssd:name <http://ldf.fi/mmm/places/> ;
+		    ssd:graph <http://ldf.fi/mmm/places/> ] ;
     foaf:homepage <http://www.ldf.fi/dataset/mmm> .
 
 <http://ldf.fi/mmm/> a ssd:Graph ;
     dct:title "Mapping Manuscript Migrations"@en ;
     void:exampleResource <http://ldf.fi/mmm/manifestation_singleton/sdbm_784> ;
     void:uriSpace "http://ldf.fi/mmm/" ;
-    void:vocabulary <http://ldf.fi/schema/mmm>, 
+    void:vocabulary <http://ldf.fi/schema/mmm/>, 
         <http://erlangen-crm.org/current/>,
         <http://erlangen-crm.org/efrbroo/>, 
-        <http://vocab.getty.edu/ontology#>,
         rdf:,
         rdfs:,
-        skos: .
+        owl:,
+        skos:,
+        dct: .
+
+<http://ldf.fi/mmm/places/> a ssd:Graph ;
+    dct:title "Mapping Manuscript Migrations - Places"@en ;
+    void:exampleResource <http://ldf.fi/mmm/place/bodley_bodley_place_1> ;
+    void:uriSpace "http://ldf.fi/mmm/place/" ;
+    void:vocabulary <http://ldf.fi/schema/mmm>,
+        <http://erlangen-crm.org/current/>,
+        <http://vocab.getty.edu/ontology#>,
+        <http://www.geonames.org/ontology#>,
+        rdf:,
+        owl:,
+        skos:,
+        dct:,
+        wgs84: .
 
 <http://ldf.fi/mmm/sparql> a ssd:Service ;
     ssd:defaultDataset <http://ldf.fi/mmm> ;
