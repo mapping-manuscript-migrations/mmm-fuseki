@@ -6,7 +6,7 @@ The data is downloaded from [Zenodo](https://doi.org/10.5281/zenodo.3632944) and
 
 ## Build
 
-`docker build -t mmm-fuseki`
+`docker build -t mmm-fuseki .`
 
 ## Run
 
