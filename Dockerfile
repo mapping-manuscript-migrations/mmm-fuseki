@@ -4,7 +4,7 @@ COPY fuseki-config.ttl $FUSEKI_BASE/config.ttl
 COPY assembler.ttl $FUSEKI_BASE/configuration/assembler.ttl
 COPY schema/* /tmp/
 
-RUN wget -q -O /tmp/mmm_data.zip https://zenodo.org/record/3632945/files/mmm_data.zip?download=1 \
+RUN wget -q -O /tmp/mmm_data.zip https://zenodo.org/record/3667486/files/mmm_data.zip?download=1 \
  && unzip /tmp/mmm_data.zip -d /tmp
 
 RUN $TDBLOADER --graph=http://ldf.fi/mmm/ /tmp/mmm_bibale.ttl \
