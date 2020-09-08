@@ -1,3 +1,4 @@
+@prefix : <http://ldf.fi/schema/mmm/> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix ldf-schema: <http://ldf.fi/schema/ldf/> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
@@ -9,70 +10,53 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix dcat: <http://www.w3.org/ns/dcat#> .
-@prefix wgs84: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
-@prefix owl: <http://www.w3.org/2002/07/owl#> .
 
 <http://ldf.fi/mmm> a ssd:Dataset , void:Dataset , dcat:Dataset ;
     ldf-schema:dataVisualization <http://www.ldf.fi/visualization/mmm> ;
     ldf-schema:starRating 6 ;
-    dct:description """<p>The Mapping Manuscript Migrations (MMM) project transformed 
+    dct:description """<p>The Mapping Manuscript Migrations (MMM) project transformed
         three separate datasets into a unified knowledge graph. The source databases include
         </p>
         <ul>
             <li><i>Schoenberg Database of Manuscripts</i> from the Schoenberg Institute for Manuscript Studies,</li>
-            <li><i>Bibale database</i> from the Institute for Research and History of Texts, and</li> 
+            <li><i>Bibale database</i> from the Institute for Research and History of Texts, and</li>
             <li><i>Medieval Manuscripts Catalogue</i> from the Bodleian Libraries.</li>
         </ul>
-        <p>To test and demonstrate its usefulness, the MMM Knowledge Graph is in use in the 
-        <a target='blank' href='https://mappingmanuscriptmigrations.org/'>MMM Semantic Portal</a>, 
-        explained in more detail in the 
+        <p>To test and demonstrate its usefulness, the MMM Knowledge Graph is in use in the
+        <a target='blank' href='https://mappingmanuscriptmigrations.org/'>MMM Semantic Portal</a>,
+        explained in more detail in the
         <a target='blank' href='https://seco.cs.aalto.fi/projects/mmm/'>project page</a>.</p>"""@en ;
     dct:license <http://creativecommons.org/licenses/by-nc/4.0/> ;
     dct:title "Mapping Manuscript Migrations"@en ;
     dct:publisher <http://seco.cs.aalto.fi> ;
-    dct:rightsHolder <http://seco.cs.aalto.fi>, 
+    dct:rightsHolder <http://seco.cs.aalto.fi>,
         <https://schoenberginstitute.org>,
         <https://www.bodleian.ox.ac.uk>,
         <https://www.irht.cnrs.fr> ;
     dct:creator <http://seco.cs.aalto.fi> ;
+    dct:modified "2020-09-08"^^xsd:date ;
+    dct:source :SDBM , :Bodley , :Bibale ;
     void:sparqlEndpoint <http://ldf.fi/mmm/sparql> ;
     void:uriLookupEndPoint <http://ldf.fi/data?uri=> ;
     void:uriSpace "http://ldf.fi/mmm/" ;
-    # void:dataDump <https://zenodo.org/record/3431122/files/warsampo.zip> ;
-    ssd:namedGraph [ a ssd:NamedGraph ;
-            ssd:name <http://ldf.fi/mmm/> ;
-            ssd:graph <http://ldf.fi/mmm/> ],
-        [ a ssd:NamedGraph ;
-		    ssd:name <http://ldf.fi/mmm/places/> ;
-		    ssd:graph <http://ldf.fi/mmm/places/> ] ;
+    ssd:namedGraph [
+		a ssd:NamedGraph ;
+		ssd:name <http://ldf.fi/mmm/> ;
+		ssd:graph <http://ldf.fi/mmm/> ;
+	] ;
     foaf:homepage <http://www.ldf.fi/dataset/mmm> .
 
 <http://ldf.fi/mmm/> a ssd:Graph ;
     dct:title "Mapping Manuscript Migrations"@en ;
     void:exampleResource <http://ldf.fi/mmm/manifestation_singleton/sdbm_784> ;
     void:uriSpace "http://ldf.fi/mmm/" ;
-    void:vocabulary <http://ldf.fi/schema/mmm/>, 
-        <http://erlangen-crm.org/current/>,
-        <http://erlangen-crm.org/efrbroo/>, 
-        rdf:,
-        rdfs:,
-        owl:,
-        skos:,
-        dct: .
-
-<http://ldf.fi/mmm/places/> a ssd:Graph ;
-    dct:title "Mapping Manuscript Migrations - Places"@en ;
-    void:exampleResource <http://ldf.fi/mmm/place/bodley_bodley_place_1> ;
-    void:uriSpace "http://ldf.fi/mmm/place/" ;
     void:vocabulary <http://ldf.fi/schema/mmm>,
         <http://erlangen-crm.org/current/>,
+        <http://erlangen-crm.org/efrbroo/>,
         <http://vocab.getty.edu/ontology#>,
-        <http://www.geonames.org/ontology#>,
         rdf:,
-        owl:,
-        skos:,
-        dct:,
-        wgs84: .
+        rdfs:,
+        skos: .
 
 <http://ldf.fi/mmm/sparql> a ssd:Service ;
     ssd:defaultDataset <http://ldf.fi/mmm> ;
@@ -103,3 +87,23 @@
 <https://www.irht.cnrs.fr> a foaf:Organization ;
     skos:prefLabel "The Institute for Research and History of Texts"@en ;
 	foaf:homepage "https://www.irht.cnrs.fr/?q=en" .
+
+:Database a rdfs:Class ;
+    skos:prefLabel "A database containing source information" .
+
+:SDBM a :Database ;
+    skos:prefLabel "Schoenberg Database of Manuscripts" ;
+    dct:modified "2020-09-01"^^xsd:date ;
+    foaf:page <https://sdbm.library.upenn.edu/> .
+
+:Bodley a :Database ;
+    skos:prefLabel "Medieval Manuscripts in Oxford Libraries" ;
+    dct:modified "2019-10-31"^^xsd:date ;
+    foaf:page <https://medieval.bodleian.ox.ac.uk/> .
+
+:Bibale a :Database ;
+    skos:prefLabel "Bibale Database" ;
+    dct:modified "2020-09-07"^^xsd:date ;
+    foaf:page <http://bibale.irht.cnrs.fr/> .
+
+
