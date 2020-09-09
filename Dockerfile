@@ -2,9 +2,8 @@ FROM secoresearch/fuseki
 
 COPY fuseki-config.ttl $FUSEKI_BASE/config.ttl
 COPY assembler.ttl $FUSEKI_BASE/configuration/assembler.ttl
-COPY schema/* /tmp/
 
-RUN wget -q -O /tmp/mmm_data.zip https://zenodo.org/record/3667486/files/mmm_data.zip?download=1 \
+RUN wget -q -O /tmp/mmm_data.zip https://zenodo.org/record/4019643/files/mmm_data_v2.1.0.zip?download=1 \
  && unzip /tmp/mmm_data.zip -d /tmp
 
 RUN $TDBLOADER --graph=http://ldf.fi/mmm/ /tmp/mmm_bibale.ttl \
@@ -29,4 +28,3 @@ RUN chgrp -R 0 $FUSEKI_BASE \
  && chmod -R g+rwX $FUSEKI_BASE
  
 USER 9008
-
