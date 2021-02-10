@@ -1,4 +1,4 @@
-FROM secoresearch/fuseki
+FROM secoresearch/fuseki:spatial-legacy
 
 COPY fuseki-config.ttl $FUSEKI_BASE/config.ttl
 COPY assembler.ttl $FUSEKI_BASE/configuration/assembler.ttl
